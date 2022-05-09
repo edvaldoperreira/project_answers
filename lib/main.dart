@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 
 main() => runApp(QuestionApp());
 
-class QuestionAppState extends State<QuestionApp> {
-  var selectedQuestion = 0;
+class _QuestionAppState extends State<QuestionApp> {
+  var _selectedQuestion = 0;
 
-  void answer() {
+  void _answer() {
     setState(() {
-      selectedQuestion++;
+      _selectedQuestion++;
     });
-    print(selectedQuestion);
+    print(_selectedQuestion);
   }
 
   @override
@@ -29,18 +29,18 @@ class QuestionAppState extends State<QuestionApp> {
           ),
           body: Column(
             children: [
-              Text(questions[selectedQuestion]),
+              Text(questions[_selectedQuestion]),
               ElevatedButton(
                 child: Text('Answer 1'),
-                onPressed: answer,
+                onPressed: _answer,
               ),
               ElevatedButton(
                 child: Text('Answer 2'),
-                onPressed: answer,
+                onPressed: _answer,
               ),
               ElevatedButton(
                 child: Text('Answer 3'),
-                onPressed: answer,
+                onPressed: _answer,
               ),
             ],
           )),
@@ -50,7 +50,7 @@ class QuestionAppState extends State<QuestionApp> {
 
 class QuestionApp extends StatefulWidget {
   @override
-  QuestionAppState createState() {
-    return QuestionAppState();
+  _QuestionAppState createState() {
+    return _QuestionAppState();
   }
 }
