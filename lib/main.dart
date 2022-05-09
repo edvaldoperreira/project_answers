@@ -1,9 +1,8 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, use_key_in_widget_constructors
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_answers/question.dart';
-import 'question.dart ';
+import 'question.dart';
 
 main() => runApp(QuestionApp());
 
