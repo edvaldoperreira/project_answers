@@ -2,6 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_answers/question.dart';
+import 'question.dart ';
 
 main() => runApp(QuestionApp());
 
@@ -29,7 +31,7 @@ class _QuestionAppState extends State<QuestionApp> {
           ),
           body: Column(
             children: [
-              Text(questions[_selectedQuestion]),
+              Question(questions[_selectedQuestion]),
               ElevatedButton(
                 child: Text('Answer 1'),
                 onPressed: _answer,
