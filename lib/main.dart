@@ -1,10 +1,9 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:project_answers/answer.dart';
-import 'package:project_answers/question.dart';
-import 'question.dart';
-import 'answer.dart';
+import 'package:project_answers/quiz.dart';
+import 'package:project_answers/result.dart';
+import 'result.dart';
 
 main() => runApp(QuestionApp());
 
@@ -36,38 +35,25 @@ class _QuestionAppState extends State<QuestionApp> {
     return _selectedQuestion < questions.length;
   }
 
+  String get selectedQuestion {
+    return questions[_selectedQuestion]["text"] as String;
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> answers = hasSelectedQuestion
         ? questions[_selectedQuestion]['answers'] as List<String>
         : [];
 
-    // List<Widget> answers = [];
-    // for (String answer
-    //     in questions[_selectedQuestion]['answers'] as List<String>) {
-    //   answers.add(Answer(answer, _answer));
-    // }
-
     return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('Questions'),
-          ),
-          body: hasSelectedQuestion
-              ? Column(
-                  children: [
-                    Question(questions[_selectedQuestion]["text"] as String),
-                    ...answers.map((item) => Answer(item, _answer)).toList(),
-                  ],
-                )
-              : Center(
-                  child: Text(
-                    'Congratulations! There are no more questions for you!',
-                    style: TextStyle(fontSize: 28),
-                    textAlign: TextAlign.center,
-                  ),
-                )),
-    );
+        home: Scaffold(
+      appBar: AppBar(
+        title: Text('Questions'),
+      ),
+      body: hasSelectedQuestion
+          ? Quiz(selectedQuestion, answers, _answer)
+          : Result(),
+    ));
   }
 }
 
