@@ -34,11 +34,14 @@ class _QuestionAppState extends State<QuestionApp> {
       }
     ];
 
-    List<Widget> answers = [];
-    for (String answer
-        in questions[_selectedQuestion]['answers'] as List<String>) {
-      answers.add(Answer(answer, _answer));
-    }
+    List<String> answers =
+        questions[_selectedQuestion]['answers'] as List<String>;
+
+    // List<Widget> answers = [];
+    // for (String answer
+    //     in questions[_selectedQuestion]['answers'] as List<String>) {
+    //   answers.add(Answer(answer, _answer));
+    // }
 
     return MaterialApp(
       home: Scaffold(
@@ -48,7 +51,7 @@ class _QuestionAppState extends State<QuestionApp> {
           body: Column(
             children: [
               Question(questions[_selectedQuestion]["text"] as String),
-              ...answers,
+              ...answers.map((item) => Answer(item, _answer)).toList(),
             ],
           )),
     );
