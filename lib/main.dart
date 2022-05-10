@@ -60,7 +60,13 @@ class _QuestionAppState extends State<QuestionApp> {
                     ...answers.map((item) => Answer(item, _answer)).toList(),
                   ],
                 )
-              : null),
+              : Center(
+                  child: Text(
+                    'Congratulations! There are no more questions for you!',
+                    style: TextStyle(fontSize: 28),
+                    textAlign: TextAlign.center,
+                  ),
+                )),
     );
   }
 }
