@@ -15,15 +15,30 @@ class _QuestionAppState extends State<QuestionApp> {
     setState(() {
       _selectedQuestion++;
     });
-    print(_selectedQuestion);
   }
 
   @override
   Widget build(BuildContext context) {
     final questions = [
-      "What is your favorite color.",
-      "What is your favorite animal."
+      {
+        'text': 'What is your favorite color.',
+        'answers': ['Black', 'Red', 'Blue', 'White'],
+      },
+      {
+        'text': 'What is your favorite animal.',
+        'answers': ['Lion', 'Snake', 'Cat', 'Dog'],
+      },
+      {
+        'text': 'What is your favorite language.',
+        'answers': ['C#', 'JavaScript', 'CSS', 'Flutter'],
+      }
     ];
+
+    List<Widget> answers = [];
+    for (String answer
+        in questions[_selectedQuestion]['answers'] as List<String>) {
+      answers.add(Answer(answer, _answer));
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -32,10 +47,8 @@ class _QuestionAppState extends State<QuestionApp> {
           ),
           body: Column(
             children: [
-              Question(questions[_selectedQuestion]),
-              Answer("Answer 1", _answer),
-              Answer("Answer 2", _answer),
-              Answer("Answer 3", _answer),
+              Question(questions[_selectedQuestion]["text"] as String),
+              ...answers,
             ],
           )),
     );
