@@ -11,31 +11,36 @@ main() => runApp(QuestionApp());
 class _QuestionAppState extends State<QuestionApp> {
   var _selectedQuestion = 0;
 
+  final questions = [
+    {
+      'text': 'What is your favorite color.',
+      'answers': ['Black', 'Red', 'Blue', 'White'],
+    },
+    {
+      'text': 'What is your favorite animal.',
+      'answers': ['Lion', 'Snake', 'Cat', 'Dog'],
+    },
+    {
+      'text': 'What is your favorite language.',
+      'answers': ['C#', 'JavaScript', 'CSS', 'Flutter'],
+    }
+  ];
+
   void _answer() {
     setState(() {
       _selectedQuestion++;
     });
   }
 
+  bool get hasSelectedQuestion {
+    return _selectedQuestion < questions.length;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final questions = [
-      {
-        'text': 'What is your favorite color.',
-        'answers': ['Black', 'Red', 'Blue', 'White'],
-      },
-      {
-        'text': 'What is your favorite animal.',
-        'answers': ['Lion', 'Snake', 'Cat', 'Dog'],
-      },
-      {
-        'text': 'What is your favorite language.',
-        'answers': ['C#', 'JavaScript', 'CSS', 'Flutter'],
-      }
-    ];
-
-    List<String> answers =
-        questions[_selectedQuestion]['answers'] as List<String>;
+    List<String> answers = hasSelectedQuestion
+        ? questions[_selectedQuestion]['answers'] as List<String>
+        : [];
 
     // List<Widget> answers = [];
     // for (String answer
@@ -48,12 +53,14 @@ class _QuestionAppState extends State<QuestionApp> {
           appBar: AppBar(
             title: Text('Questions'),
           ),
-          body: Column(
-            children: [
-              Question(questions[_selectedQuestion]["text"] as String),
-              ...answers.map((item) => Answer(item, _answer)).toList(),
-            ],
-          )),
+          body: hasSelectedQuestion
+              ? Column(
+                  children: [
+                    Question(questions[_selectedQuestion]["text"] as String),
+                    ...answers.map((item) => Answer(item, _answer)).toList(),
+                  ],
+                )
+              : null),
     );
   }
 }
