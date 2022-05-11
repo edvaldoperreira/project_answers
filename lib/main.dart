@@ -9,26 +9,45 @@ main() => runApp(QuestionApp());
 
 class _QuestionAppState extends State<QuestionApp> {
   var _selectedQuestion = 0;
+  var _totalScore = 0;
 
   final questions = [
     {
       'text': 'What is your favorite color.',
-      'answers': ['Black', 'Red', 'Blue', 'White'],
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 8},
+        {'text': 'Blue', 'score': 5},
+        {'text': 'White', 'score': 3},
+      ],
     },
     {
       'text': 'What is your favorite animal.',
-      'answers': ['Lion', 'Snake', 'Cat', 'Dog'],
+      'answers': [
+        {'text': 'Lion', 'score': 5},
+        {'text': 'Snake', 'score': 2},
+        {'text': 'Cat', 'score': 3},
+        {'text': 'Dog', 'score': 1},
+      ],
     },
     {
       'text': 'What is your favorite language.',
-      'answers': ['C#', 'JavaScript', 'CSS', 'Flutter'],
+      'answers': [
+        {'text': 'C#', 'score': 3},
+        {'text': 'JavaScript', 'score': 2},
+        {'text': 'CSS', 'score': 6},
+        {'text': 'Flutter', 'score': 9},
+      ],
     }
   ];
 
-  void _answer() {
+  void _answer(int score) {
     setState(() {
+      _totalScore += score;
       _selectedQuestion++;
     });
+
+    print(_totalScore);
   }
 
   bool get hasSelectedQuestion {
@@ -41,8 +60,8 @@ class _QuestionAppState extends State<QuestionApp> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> answers = hasSelectedQuestion
-        ? questions[_selectedQuestion]['answers'] as List<String>
+    List<Map<String, Object>> answers = hasSelectedQuestion
+        ? questions[_selectedQuestion]['answers'] as List<Map<String, Object>>
         : [];
 
     return MaterialApp(
